@@ -1,0 +1,46 @@
+Health Card API Test Examples
+================================
+
+Base URL: http://localhost:8080/api
+
+1. CREATE Health Card (POST /save)
+   Method: POST
+   URL: http://localhost:8080/api/save
+   Headers: Content-Type: application/json
+   Body:
+   {
+     "name": "John Doe",
+     "age": 30,
+     "gender": "Male",
+     "email": "john.doe@email.com",
+     "phone": "1234567890",
+     "address": "123 Main St, City, State"
+   }
+
+2. GET All Cards (GET /cards)
+   Method: GET
+   URL: http://localhost:8080/api/cards
+
+3. GET Card by ID (GET /card/{id})
+   Method: GET
+   URL: http://localhost:8080/api/card/1
+
+4. DELETE Card (DELETE /delete/{id})
+   Method: DELETE
+   URL: http://localhost:8080/api/delete/1
+
+CURL Examples:
+--------------
+# Create a health card
+curl -X POST http://localhost:8080/api/save \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John Doe","age":30,"gender":"Male","email":"john.doe@email.com","phone":"1234567890","address":"123 Main St"}'
+
+# Get all cards
+curl http://localhost:8080/api/cards
+
+# Get card by ID
+curl http://localhost:8080/api/card/1
+
+# Delete card
+curl -X DELETE http://localhost:8080/api/delete/1

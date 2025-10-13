@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Health Card - MySQL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .card {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .delete-btn {
+            background: #dc3545;
+        }
+        .delete-btn:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Health Card System </h1>
+        
+        <!-- Input Form -->
+        <div class="section">
+            <h2>Add Health Card</h2>
+            <form id="healthForm">
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" id="name" required placeholder="Enter full name">
+                </div>
+                <div class="form-group">
+                    <label>Age:</label>
+                    <input type="number" id="age" required min="1" max="150" placeholder="Enter age">
+                </div>
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <select id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="email" required placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label>Phone:</label>
+                    <input type="tel" id="phone" required placeholder="Enter phone number">
+                </div>
+                <div class="form-group">
+                    <label>Address:</label>
+                    <textarea id="address" rows="3" required placeholder="Enter address"></textarea>
+                </div>
+                <button type="submit">Save Health Card</button>
+            </form>
+            <div id="message"></div>
+        </div>
+
+        <!-- Display Data -->
+        <div class="section">
+            <h2>Saved Health Cards</h2>
+            <button onclick="loadCards()">Load All Cards</button>
+            <button onclick="clearForm()">Clear Form</button>
+            <div id="cardsList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Save health card
+        document.getElementById('healthForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const healthCard = {
+                name: document.getElementById('name').value,
+                age: parseInt(document.getElementById('age').value),
+                gender: document.getElementById('gender').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:8080/api/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(healthCard)
+                });
+
+                const result = await response.text();
+                showMessage(result, 'success');
+                document.getElementById('healthForm').reset();
+                loadCards(); // Reload the list
+            } catch (error) {
+                showMessage('Error saving data: ' + error, 'error');
+            }
+        });
+
+        // Load all health cards
+        async function loadCards() {
+            try {
+                const response = await fetch('http://localhost:8080/api/cards');
+                const cards = await response.json();
+                
+                const cardsList = document.getElementById('cardsList');
+                cardsList.innerHTML = '';
+                
+                if (cards.length === 0) {
+                    cardsList.innerHTML = '<p>No health cards found.</p>';
+                    return;
+                }
+                
+                cards.forEach(card => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'card';
+                    cardElement.innerHTML = `
+                        <strong>ID: ${card.id}</strong><br>
+                        <strong>Name:</strong> ${card.name}<br>
+                        <strong>Age:</strong> ${card.age}<br>
+                        <strong>Gender:</strong> ${card.gender}<br>
+                        <strong>Email:</strong> ${card.email}<br>
+                        <strong>Phone:</strong> ${card.phone}<br>
+                        <strong>Address:</strong> ${card.address}<br>
+                        <button class="delete-btn" onclick="deleteCard(${card.id})">Delete</button>
+                    `;
+                    cardsList.appendChild(cardElement);
+                });
+            } catch (error) {
+                showMessage('Error loading data: ' + error, 'error');
+            }
+        }
+
+        // Delete health card
+        async function deleteCard(id) {
+            if (confirm('Are you sure you want to delete this card?')) {
+                try {
+                    const response = await fetch(`http://localhost:8080/api/delete/${id}`, {
+                        method: 'DELETE'
+                    });
+                    const result = await response.text();
+                    showMessage(result, 'success');
+                    loadCards(); // Reload the list
+                } catch (error) {
+                    showMessage('Error deleting card: ' + error, 'error');
+                }
+            }
+        }
+
+        // Clear form
+        function clearForm() {
+            document.getElementById('healthForm').reset();
+            showMessage('Form cleared!', 'success');
+        }
+
+        // Show message
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = `<div class="${type}">${message}</div>`;
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        // Load cards when page loads
+        window.onload = loadCards;
+    </script>
+</body>
+</html>
