@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Card Management System - Demo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .demo-section {
+            margin: 30px 0;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .demo-section h2 {
+            color: #4facfe;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4facfe;
+        }
+        
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tech-badge {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            margin: 10px 10px 10px 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .screenshot-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .content { padding: 20px; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-heartbeat"></i> Health Card Management System</h1>
+            <p>Modern Web-Based Patient Record Management Solution</p>
+        </div>
+
+        <div class="content">
+            <div class="demo-section">
+                <h2><i class="fas fa-info-circle"></i> Project Overview</h2>
+                <p>The Health Card Management System is a comprehensive full-stack web application designed to digitize and streamline patient health record management in healthcare facilities. Built with modern technologies, it provides an efficient solution for healthcare professionals to manage patient data.</p>
+                
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                    <p>Application Screenshot</p>
+                    <small>Add your application screenshots here</small>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h2><i class="fas fa-star"></i> Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3><i class="fas fa-plus-circle"></i> Patient Management</h3>
+                        <p>Complete CRUD operations for patient health cards with form validation and real-time feedback.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-search"></i> Advanced Search</h3>
+                        <p>Real-time search and filtering capabilities by name, email, phone, and gender demographics.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-chart-bar"></i> Analytics Dashboard</h3>
+                        <p>Live statistics showing total patients, gender distribution, and average age calculations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-download"></i> Data Export</h3>
+                        <p>Export patient data to CSV format for external analysis and backup purposes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-mobile-alt"></i> Responsive Design</h3>
+                        <p>Mobile-first responsive interface that works seamlessly across all devices and screen sizes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-shield-alt"></i> Data Integrity</h3>
+                        <p>Robust validation and error handling to ensure data accuracy and system reliability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h2><i class="fas fa-code"></i> Technology Stack</h2>
+                <div class="tech-stack">
+                    <span class="tech-badge">Java 11+</span>
+                    <span class="tech-badge">Spring Boot 2.7.0</span>
+                    <span class="tech-badge">MySQL 8.0</span>
+                    <span class="tech-badge">JPA/Hibernate</span>
+                    <span class="tech-badge">Maven</span>
+                    <span class="tech-badge">HTML5</span>
+                    <span class="tech-badge">CSS3</span>
+                    <span class="tech-badge">JavaScript ES6+</span>
+                    <span class="tech-badge">Font Awesome</span>
+                    <span class="tech-badge">RESTful API</span>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h2><i class="fas fa-cogs"></i> System Architecture</h2>
+                <p>The application follows a <strong>3-tier architecture</strong> with clear separation of concerns:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>Presentation Layer:</strong> Modern responsive frontend with HTML5, CSS3, and JavaScript</li>
+                    <li><strong>Business Layer:</strong> Spring Boot REST API with comprehensive CRUD operations</li>
+                    <li><strong>Data Layer:</strong> MySQL database with JPA/Hibernate ORM mapping</li>
+                </ul>
+            </div>
+
+            <div class="demo-section">
+                <h2><i class="fas fa-users"></i> Team Information</h2>
+                <p>This project was developed by a team of 3-4 members as part of our academic curriculum, demonstrating full-stack web development skills and modern software engineering practices.</p>
+                
+                <div style="margin-top: 20px;">
+                    <a href="https://github.com/navaneeth43/demooftheproject" class="btn">
+                        <i class="fab fa-github"></i> View Source Code
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-play"></i> Live Demo
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-file-pdf"></i> Project Report
+                    </a>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h2><i class="fas fa-rocket"></i> Future Enhancements</h2>
+                <ul style="padding-left: 20px;">
+                    <li>User authentication and role-based access control</li>
+                    <li>Medical history tracking and management</li>
+                    <li>Appointment scheduling system</li>
+                    <li>Mobile application development</li>
+                    <li>Advanced analytics and reporting</li>
+                    <li>Integration with hospital management systems</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate feature cards on scroll
+            const cards = document.querySelectorAll('.feature-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
