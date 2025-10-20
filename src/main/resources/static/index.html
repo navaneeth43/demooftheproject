@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Card Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -13,10 +14,12 @@
         }
         
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
+            line-height: 1.6;
         }
         
         .container { 
@@ -30,9 +33,9 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 40px 20px;
+            padding: 60px 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -41,31 +44,45 @@
         .header::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            animation: float 20s infinite linear;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><circle cx="30" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="20" r="1" fill="rgba(255,255,255,0.08)"/></svg>') repeat;
+            animation: float 30s infinite linear;
+            opacity: 0.6;
         }
         
         @keyframes float {
             0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(-100px) translateY(-100px); }
+            100% { transform: translateX(-60px) translateY(-60px); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
         
         .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            letter-spacing: -1px;
         }
         
         .header p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 300;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .header-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
             opacity: 0.9;
-            position: relative;
-            z-index: 1;
         }
         
         .stats-bar {
@@ -151,66 +168,96 @@
         .form-group select, 
         .form-group textarea { 
             width: 100%; 
-            padding: 15px 20px;
-            border: 2px solid #e1e5e9;
-            border-radius: 12px;
+            padding: 16px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
             font-size: 16px;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
+            font-weight: 400;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
         .form-group input:focus, 
         .form-group select:focus, 
         .form-group textarea:focus {
             outline: none;
-            border-color: #4facfe;
+            border-color: #667eea;
             background: white;
-            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
-            transform: translateY(-2px);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1), 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-1px);
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
         }
         
         .btn { 
-            padding: 15px 30px; 
-            margin: 10px 5px; 
+            padding: 16px 32px; 
+            margin: 8px 6px; 
             border: none;
-            border-radius: 12px;
+            border-radius: 16px;
             cursor: pointer;
             font-size: 16px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
             gap: 8px;
             text-decoration: none;
         }
         
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
         .btn-primary {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
         
         .btn-success {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(86, 171, 47, 0.3);
         }
         
         .btn-danger {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
         }
         
         .btn-info {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
         .btn:active {
-            transform: translateY(-1px);
+            transform: translateY(0);
         }
         
         .cards-grid {
@@ -222,11 +269,11 @@
         
         .health-card {
             background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 1px solid #e1e5e9;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
             position: relative;
             overflow: hidden;
         }
@@ -237,13 +284,25 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            height: 5px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .health-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
         }
         
         .health-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            border-color: #e2e8f0;
         }
         
         .card-header {
@@ -405,20 +464,59 @@
             flex-wrap: wrap;
         }
         
-        .filter-btn {
-            padding: 8px 16px;
-            border: 2px solid #e1e5e9;
+        .search-bar {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: white;
-            border-radius: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1), 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 18px;
+        }
+        
+        .filter-btn {
+            padding: 12px 20px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         .filter-btn.active {
-            background: #4facfe;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-color: #4facfe;
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
         
         @media (max-width: 768px) {
@@ -434,8 +532,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-heartbeat"></i> Health Card Management System</h1>
-            <p>Advanced patient health card management with modern interface</p>
+            <div class="header-content">
+                <div class="header-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h1>Health Card Management System</h1>
+                <p>Advanced patient health card management with modern interface and seamless user experience</p>
+            </div>
         </div>
 
         <div class="stats-bar">
@@ -522,15 +625,18 @@
                     <button class="filter-btn" onclick="filterCards('Other')">Other</button>
                 </div>
 
-                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
                     <button class="btn btn-success" onclick="getAllCards()">
                         <i class="fas fa-sync-alt"></i> Refresh Cards
                     </button>
                     <button class="btn btn-info" onclick="exportData()">
                         <i class="fas fa-download"></i> Export Data
                     </button>
-                    <button class="btn btn-danger" onclick="deleteAllCards()" style="margin-left: auto;">
-                        <i class="fas fa-trash-alt"></i> Clear All
+                    <button class="btn btn-warning" onclick="refreshNumbering()" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);">
+                        <i class="fas fa-sort-numeric-up"></i> Refresh Numbering
+                    </button>
+                    <button class="btn btn-danger" onclick="resetAllCards()" style="margin-left: auto;">
+                        <i class="fas fa-trash-alt"></i> Reset All
                     </button>
                 </div>
 
@@ -545,6 +651,7 @@
         const API_BASE = 'http://localhost:8080/api';
         let allCards = [];
         let filteredCards = [];
+        let editingCardId = null; // Track which card is being edited
         
         // Load cards on page load
         window.onload = function() {
@@ -583,17 +690,29 @@
             };
             
             try {
-                const response = await fetch(`${API_BASE}/save`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+                let response;
+                if (editingCardId) {
+                    // Update existing card
+                    response = await fetch(`${API_BASE}/update/${editingCardId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    // Create new card
+                    response = await fetch(`${API_BASE}/save`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
                 
                 const result = await response.text();
                 showResult(`<i class="fas fa-check-circle"></i> ${result}`, 'success');
                 
-                // Clear form
+                // Clear form and reset editing state
                 clearForm();
+                editingCardId = null;
                 
                 // Refresh cards
                 await getAllCards();
@@ -650,7 +769,7 @@
                         <div class="card-title">
                             ${getGenderIcon(card.gender)} ${card.name}
                         </div>
-                        <div class="card-id">ID: ${card.id}</div>
+                        <div class="card-id">${card.cardNumber || 'HC-' + String(card.id).padStart(6, '0')}</div>
                     </div>
                     <div class="card-info">
                         <div class="info-item">
@@ -677,6 +796,9 @@
                     <div class="card-actions">
                         <button onclick="editCard(${card.id})" class="btn btn-info" style="font-size: 14px; padding: 8px 16px;">
                             <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button onclick="exportCardToPdf(${card.id})" class="btn btn-success" style="font-size: 14px; padding: 8px 16px;">
+                            <i class="fas fa-file-pdf"></i> PDF
                         </button>
                         <button onclick="deleteCard(${card.id})" class="btn btn-danger" style="font-size: 14px; padding: 8px 16px;">
                             <i class="fas fa-trash"></i> Delete
@@ -714,12 +836,17 @@
         function editCard(id) {
             const card = allCards.find(c => c.id === id);
             if (card) {
+                editingCardId = id; // Set the editing state
                 document.getElementById('name').value = card.name;
                 document.getElementById('age').value = card.age;
                 document.getElementById('gender').value = card.gender;
                 document.getElementById('email').value = card.email;
                 document.getElementById('phone').value = card.phone;
                 document.getElementById('address').value = card.address;
+                
+                // Update submit button text
+                const submitBtn = document.querySelector('#healthCardForm button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Update Health Card';
                 
                 // Scroll to form
                 document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
@@ -729,6 +856,100 @@
         
         function clearForm() {
             document.getElementById('healthCardForm').reset();
+            editingCardId = null;
+            // Reset submit button text
+            const submitBtn = document.querySelector('#healthCardForm button[type="submit"]');
+            submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Health Card';
+        }
+        
+        async function exportCardToPdf(id) {
+            try {
+                showResult(`<i class="fas fa-spinner fa-spin"></i> Generating PDF...`, 'info');
+                
+                const response = await fetch(`${API_BASE}/export/pdf/${id}`, {
+                    method: 'GET'
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `health_card_${id}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                    
+                    showResult(`<i class="fas fa-check-circle"></i> PDF downloaded successfully!`, 'success');
+                } else {
+                    showResult(`<i class="fas fa-exclamation-triangle"></i> Error generating PDF`, 'error');
+                }
+            } catch (error) {
+                showResult(`<i class="fas fa-exclamation-triangle"></i> Error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function refreshNumbering() {
+            if (confirm('This will refresh all card numbers sequentially (HC-000001, HC-000002, etc.). Continue?')) {
+                try {
+                    showResult(`<i class="fas fa-spinner fa-spin"></i> Refreshing numbering...`, 'info');
+                    
+                    const response = await fetch(`${API_BASE}/refresh-numbering`, {
+                        method: 'POST'
+                    });
+                    
+                    const result = await response.text();
+                    showResult(`<i class="fas fa-check-circle"></i> ${result}`, 'success');
+                    
+                    // Refresh the cards display
+                    await getAllCards();
+                } catch (error) {
+                    showResult(`<i class="fas fa-exclamation-triangle"></i> Error refreshing numbering: ${error.message}`, 'error');
+                }
+            }
+        }
+        
+        
+        async function resetAllCards() {
+            if (confirm('🗑️ CLEAR DATABASE: This will completely clear all health card data and reset the database to fresh state. Continue?')) {
+                if (confirm('🚨 FINAL CONFIRMATION: All data will be permanently deleted. This cannot be undone!')) {
+                    try {
+                        showResult(`<i class="fas fa-spinner fa-spin"></i> Clearing database...`, 'info');
+                        
+                        const response = await fetch(`${API_BASE}/reset-all`, {
+                            method: 'DELETE'
+                        });
+                        
+                        const result = await response.text();
+                        showResult(`<i class="fas fa-check-circle"></i> ${result}`, 'success');
+                        
+                        // Refresh the cards display
+                        await getAllCards();
+                        
+                        // Show database status
+                        setTimeout(async () => {
+                            const statusResponse = await fetch(`${API_BASE}/database-status`);
+                            const status = await statusResponse.text();
+                            showResult(`<i class="fas fa-info-circle"></i> ${status}`, 'info');
+                        }, 1000);
+                        
+                    } catch (error) {
+                        showResult(`<i class="fas fa-exclamation-triangle"></i> Error clearing database: ${error.message}`, 'error');
+                    }
+                }
+            }
+        }
+        
+        // Check database status
+        async function checkDatabaseStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/database-status`);
+                const status = await response.text();
+                showResult(`<i class="fas fa-info-circle"></i> ${status}`, 'info');
+            } catch (error) {
+                showResult(`<i class="fas fa-exclamation-triangle"></i> Error checking status: ${error.message}`, 'error');
+            }
         }
         
         function filterCards(gender) {

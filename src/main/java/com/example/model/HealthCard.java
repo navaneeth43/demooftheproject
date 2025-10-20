@@ -9,6 +9,9 @@ public class HealthCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column(name = "card_number", unique = true, length = 20)
+    private String cardNumber;
+    
     @Column(name = "full_name", nullable = false, length = 100)
     private String name;
     
@@ -44,6 +47,9 @@ public class HealthCard {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     
+    public String getCardNumber() { return cardNumber; }
+    public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
+    
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     
@@ -66,6 +72,7 @@ public class HealthCard {
     public String toString() {
         return "HealthCard{" +
                 "id=" + id +
+                ", cardNumber='" + cardNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
